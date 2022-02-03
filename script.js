@@ -1,30 +1,46 @@
+//COMPUTER TURN
 function computerPlay() {
     let option = ['Rock', 'Paper', 'Scissor'];
     let words = option[Math.floor(Math.random() * option.length)];
-    // console.log(words);
     return words;
 }
 
+//PLAYER TURN
 function playerPlay() {
-    let playerChoice = prompt("Do you choose Rock, Paper or Scissor?");
+    let playerChoice;
 
-    if(playerChoice.toLowerCase() === "rock") {
+    const btnR = document.querySelector('#rock');
+    const btnP = document.querySelector('#paper');
+    const btnS = document.querySelector('#scissor');
+
+    if(playerChoice = btnR) {
         playerChoice = "Rock";
-    } else if(playerChoice.toLowerCase() === "paper") {
+    } else if(playerChoice = btnP) {
         playerChoice = "Paper";
-    } else if(playerChoice.toLowerCase() === "scissor") {
+    } else if(playerChoice = btnS) {
         playerChoice = "Scissor";
-    } else if(playerChoice != "rock" || "paper" || "scissor") {
-        alert("Please try to enter your value again.");
-    } else {
-        console.log("Not sure what's going on...");
     }
     return playerChoice;
+
 }
 
 let computerScore = 0;
 let playerScore = 0;
+let moves = 0;
 
+const playGame = () => {
+    const playerOptions = [btnR, btnP, btnS];
+    
+    playerOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const movesLeft = document.querySelector('.movesleft');
+            moves++;
+            movesLeft.textContent= `Moves Left: ${5-moves}`;
+        })
+    })
+}
+
+//ROUND
 function playRound(playerSelection, computerSelection) {
     const firstLetter = playerSelection[0];
     const big = firstLetter.toUpperCase();
@@ -32,42 +48,63 @@ function playRound(playerSelection, computerSelection) {
     const small = otherLetters.toLowerCase();
     const you = big + small;
     const comp = computerSelection;
-
     
+    const result = document.querySelector('.result');
+    
+
     if(you === "Rock" && comp === "Paper" ||
     you === "Paper" && comp === "Scissor" ||
     you === "Scissor" && comp === "Rock"
     ) {
         computerScore++;
-        return `You Lose! ${comp} beats ${you}!`;
+        result.textContent = `You Lose! ${comp} beats ${you}`;
     } else if(you === "Paper" && comp === "Rock" ||
     you === "Scissor" && comp === "Paper" ||
     you === "Rock" && comp === "Scissor") {
         playerScore++;
-        return `You Win! ${you} beats ${comp}!`;
+        result.textContent = `You Win! ${you} beats ${comp}!`
     } else if(you === "Rock" && comp === "Rock" ||
     you === "Paper" && comp === "Paper" ||
     you === "Scissor" && comp === "Scissor") {
-        return "It's a tie!";
-    } else {
-        return "Something went wrong";
+        result.textContent = `It's a tie!`;
     }
-    return;
+    // return;
 }
 
+// function game() {
+//     for( i=0; i<5; i++) {
+//         console.log(playRound(playerPlay(), computerPlay()));
+//         console.log("player score: " + playerScore);
+//         console.log("computer score: " + computerScore);
+//     }
+//     if(playerScore > computerScore) {
+//         return "You win :)";
+//     } else if(computerScore > playerScore) {
+//         return "You lose :(";
+//     } else {
+//         return "It's a tie";
+//     }
+// }
+
+
+//GAME
 function game() {
-    for( i=0; i<5; i++) {
-        console.log(playRound(playerPlay(), computerPlay()));
-        console.log("player score: " + playerScore);
-        console.log("computer score: " + computerScore);
-    }
-    if(playerScore > computerScore) {
-        return "You win :)";
-    } else if(computerScore > playerScore) {
-        return "You lose :(";
-    } else {
-        return "It's a tie";
-    }
+    console.log(playRound(playerPlay(), computerPlay()));
+    playerWin.textContent = `Player Score: ${playerScore}`;
+    computerWin.textContent = `ComputerScore: ${computerScore}`;
+    // console.log('Player Score: ' + playerScore);
+    // console.log('Computer Score: ' + computerScore);
 }
 
-console.log(game());
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        game();
+    });
+})
+
+const container = document.querySelector('.container');
+const playerWin = document.createElement('div');
+const computerWin = document.createElement('div');
+container.appendChild(playerWin);
+container.appendChild(computerWin);
