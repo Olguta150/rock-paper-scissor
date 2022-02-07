@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 * {
     margin: 0;
@@ -8,8 +9,11 @@
 }
 
 body {
-    color: #DEDEDE;
-    background: #292929;
+    height: 100vh;
+    width: 100%;
+    color: #FFAD13;
+    background: #000;
+    overflow: hidden;
 }
 
 h1 {
@@ -25,4 +29,84 @@ p {
     font-size: 25px;
     text-align: center;
     padding-bottom: 10px;
+}
+
+.rps-text {
+    font-family: 'Abril Fatface', cursive;
+    font-size: 35px;
+    letter-spacing: 1px;
+}
+
+.weapons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 100px;
+    height: 50px;
+}
+
+.btn {
+    padding: 40px;
+    cursor: pointer;
+    background: #6F6E6B;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    transform: scale(.9);
+    /* color: #F9C462; */
+    color: #FFAD13;
+    background: #000;
+    transition: all .3s cubic-bezier(.17,.67,.83,.67);
+    border: 3px solid #FFAD13;
+}
+
+.fas {
+    font-size: 70px;
+    color: #000;
+}
+
+.btn:hover .fas {
+    color: #FFAD13;
+}
+
+.container {
+    text-align: center;
+    margin-top: 100px;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 35px;
+}
+
+.two-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.result {
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Abril Fatface', cursive;
+}
+
+
+.reload {
+    display: inline-block;
+    /* align-items: center;
+    justify-content: center; */
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    padding: 10px; 
+    background: transparent;
+    margin-top: 100px;
+    margin-left: 50vw;
+    /* margin-right: 47.5vw; */
+    font-size: 25px;
 }

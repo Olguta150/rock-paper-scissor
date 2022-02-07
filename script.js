@@ -1,7 +1,6 @@
 const btnR = document.querySelector('#rock');
 const btnP = document.querySelector('#paper');
 const btnS = document.querySelector('#scissors');
-const container = document.querySelector('.container');
 const playerWin = document.querySelector('.playerwin');
 const computerWin = document.querySelector('.computerwin');
 const result = document.querySelector('.result');
@@ -32,6 +31,7 @@ function playerPlay() {
 let computerScore = 0;
 let playerScore = 0;
 
+
 //ROUND
 function playRound(playerSelection, computerSelection) {
     const firstLetter = playerSelection[0];
@@ -47,47 +47,62 @@ function playRound(playerSelection, computerSelection) {
     you === "Paper" && comp === "Scissors" ||
     you === "Scissors" && comp === "Rock"
     ) {
-        computerScore++;
+        computerScore += 1;
         result.textContent = `You Lose! ${comp} beats ${you}`;
     } else if(you === "Paper" && comp === "Rock" ||
     you === "Scissors" && comp === "Paper" ||
     you === "Rock" && comp === "Scissors") {
-        playerScore++;
+        playerScore += 1;
         result.textContent = `You Win! ${you} beats ${comp}!`
     } else if(you === "Rock" && comp === "Rock" ||
     you === "Paper" && comp === "Paper" ||
     you === "Scissors" && comp === "Scissors") {
         result.textContent = `It's a tie!`;
     }
-    
+
 }
+
+
+    function disableButtons() {
+        buttons.forEach(elem => {
+            elem.disabled = true;
+        });
+    }
 
         //GAME
         function game() {
             playRound(playerPlay(), computerPlay());
-            playerWin.textContent = `Your Score: ${playerScore}`;
-            computerWin.textContent = `Alien Score: ${computerScore}`;
+            playerWin.textContent = `Your Score:   ${playerScore}`;
+            computerWin.textContent = `Alien Score:   ${computerScore}`;
 
             const reload = document.querySelector('.reload');
+            const disapear = document.querySelector('.disapear');
+
+            if(playerScore < 5 || computerScore < 5)
+            {
+                reload.style.display = 'none';
+            }
             
             if(playerScore === 5) {
                 result.textContent = `You saved everybody!!!
-                Now you are a hero!!!`;
-                body.removeChild(playerWin);
-                body.removeChild(computerWin);
-                body.removeChild(btnR);
-                body.removeChild(btnP);
-                body.removeChild(btnS);
+                You are a hero!!!`;
+                result.style.color = 'green';
+                reload.style.display = 'inline-block';
+                disableButtons();
+                disapear.style.display = 'none';
+                result.style.marginTop = '30vh';
+                result.style.marginLeft = '100px';
             } else if(computerScore === 5) {
                 result.textContent = `You lost! The world is gonna be destroied in 10 seconds...`;
-                body.removeChild(playerWin);
-                body.removeChild(computerWin);
-                body.removeChild(btnR);
-                body.removeChild(btnP);
-                body.removeChild(btnS);
+                result.style.color = 'red';
+                reload.style.display = 'inline-block';
+                result.style.marginLeft = '100px';
+                disableButtons();
+                disapear.style.display = 'none';
+                result.style.marginTop = '30vh';
             }
             
-            reload.textContent = 'Restart';
+            reload.textContent = 'Try again?';
             reload.addEventListener('click', () => {
                 window.location.reload();
             });
